@@ -1,10 +1,21 @@
 // met de coutryreader variable zorg je dat de module json-file-reader in de app geinclude wordt 
-var countryreader = require ( './src/json-file-reader')
+var jsonREADER = require ( './src/json-file-reader')
+
+var countryname = process.argv[2]
 
 // here we call the countryreader and use the module.export.readJSON in the json-file-reader.js 
-countryreader.readJSON ( './src/countries.json', function( filedata ){
+jsonREADER.readJSON ( './src/countries.json', function( jsondata ){
 // now we console log the answer of the function 
-	console.log("We have " + filedata)
+	// console.log("We have " + jsondata)
+
+	jsondata.forEach( function ( country ) {
+
+	if ( country.name == countryname ) {
+// possibly client wants to output all the info from a country?
+		console.log( "Country: " + country.name )
+		console.log( "Top Level Domain: " + country.topLevelDomain ) // tld field is an array and may contain more tld's
+	}
+})
 })
 
 // excersis:
